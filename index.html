@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>文章卡片生成器</title>
+  <link rel="stylesheet" href="web.css">
+  <script src="card.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true"></span>文章卡片生成器</a>
+    <a class="quiet-link" href="./appendix.html">插件附录 <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="workspace">
+    <section class="editor" aria-labelledby="editor-heading">
+      <div class="heading">
+        <h1 id="editor-heading">文章转卡片</h1>
+        <p>把文章整理成一张可分享的要点卡片。</p>
+      </div>
+      <form id="article-form">
+        <div class="field-head">
+          <label for="article">文章正文</label>
+          <button id="example" class="text-button" type="button">填入示例</button>
+        </div>
+        <textarea id="article" name="article" rows="10" maxlength="30000" aria-describedby="article-help" placeholder="粘贴文章。首行可以是标题。"></textarea>
+        <div class="field-help" id="article-help"><span id="article-count">0 / 30,000 字符</span></div>
+
+        <fieldset class="styles">
+          <legend>卡片风格</legend>
+          <div class="style-options">
+            <label class="style-option"><input type="radio" name="theme" value="modern" checked><span class="swatch modern" aria-hidden="true"></span>现代简约</label>
+            <label class="style-option"><input type="radio" name="theme" value="classic"><span class="swatch classic" aria-hidden="true"></span>优雅经典</label>
+            <label class="style-option"><input type="radio" name="theme" value="vivid"><span class="swatch vivid" aria-hidden="true"></span>活力鲜明</label>
+            <label class="style-option"><input type="radio" name="theme" value="business"><span class="swatch business" aria-hidden="true"></span>专业商务</label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button id="generate" class="button primary" type="submit">生成卡片 <span aria-hidden="true">↗</span></button>
+          <button id="ai-generate" class="button" type="button" hidden>用 AI 提炼</button>
+        </div>
+        <p id="ai-note" class="field-help" hidden>用 AI 提炼时，文章会发送给火山引擎。</p>
+        <p id="notice" class="notice" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="preview" aria-labelledby="preview-heading">
+      <div class="preview-head">
+        <h2 id="preview-heading">卡片预览</h2>
+        <span class="size">1080 × 800</span>
+      </div>
+      <div class="preview-frame">
+        <div id="empty" class="empty">
+          <div class="empty-symbol" aria-hidden="true"><i></i><i></i><i></i></div>
+          <strong>等一篇文章</strong>
+          <span>生成后，可直接点卡片上的文字修改。</span>
+        </div>
+        <div id="card-viewport" class="card-viewport" hidden></div>
+      </div>
+      <div class="export-actions">
+        <button id="copy" class="button" type="button" disabled>复制 HTML</button>
+        <button id="download" class="button" type="button" disabled>下载 HTML</button>
+      </div>
+      <dialog id="copy-dialog" aria-labelledby="copy-heading">
+        <form method="dialog">
+          <h2 id="copy-heading">复制 HTML</h2>
+          <textarea id="copy-source" readonly aria-label="卡片 HTML 源码"></textarea>
+          <button class="button">关闭</button>
+        </form>
+      </dialog>
+    </section>
+  </main>
+</body>
+</html>
